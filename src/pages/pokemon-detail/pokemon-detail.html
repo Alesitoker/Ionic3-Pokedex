@@ -1,0 +1,18 @@
+
+<ion-header>
+
+  <ion-navbar color = "danger">
+    <ion-title class="pokeName">{{pokemon.nombre}}</ion-title>
+    <button ion-button icon-only color= 'danger' class='menu-button' (click) = 'mostrarMenu()'><ion-icon name="menu"></ion-icon></button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-icon name="star-outline" *ngIf="!pokemon.favorito" class="star-empty" (click)="ponerFavorito()"></ion-icon>
+  <ion-icon name="star" *ngIf="pokemon.favorito" class="star-full" (click)="quitarFavorito()"></ion-icon>
+  <img class="imgPokemon" [src]="getImgPokemon()">
+  <ion-icon name="arrow-dropleft" class="arrowLeft" *ngIf="!primero"></ion-icon>
+  <ion-icon name="arrow-dropright" class="arrowRight" *ngIf="!ultimo"></ion-icon>
+</ion-content>

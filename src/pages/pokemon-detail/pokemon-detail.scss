@@ -1,0 +1,58 @@
+page-pokemon-detail {
+
+  .pokeName {
+
+  }
+
+  img.imgPokemon {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+
+  .star-full {
+    position: absolute;
+    left: 85%;
+    font-size: 200%;
+    color: gold;
+  }
+
+  .star-empty {
+    position: absolute;
+    left: 85%;
+    font-size: 200%;
+    color: black;
+  }
+
+  .arrowLeft {
+    position: absolute;
+    right: 72%;
+    top: 10%;
+    padding: 10%;
+    font-size: 300%;
+    color: DarkGrey;
+  }
+
+  .arrowRight {
+    position: absolute;
+    left: 72%;
+    top: 10%;
+    padding: 10%;
+    font-size: 300%;
+    color: DarkGrey;
+  }
+
+  .menu-button {
+    // border: 0 !important;
+    box-shadow: none !important;
+    position: absolute;
+    margin-right: 20px;
+    top: 7px;
+    right: 0;
+  }
+  .menu-button:focus {
+    outline: none !important;
+  }
+
+}

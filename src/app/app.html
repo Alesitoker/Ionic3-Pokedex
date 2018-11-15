@@ -1,0 +1,18 @@
+<ion-menu [content]="pokeMenu">
+  <ion-header>
+
+    <ion-toolbar color= "naranja-claro">
+      <ion-title>Paginas</ion-title>
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button ion-button block (click)="abrirPagina(tabs)">Abrir tabs</button>
+      <button ion-button block (click)="abrirPagina(ajustes2)">Abrir Ajustes2</button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #pokeMenu></ion-nav>

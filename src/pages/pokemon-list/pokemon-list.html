@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar color="danger" class="prueba">
+    <ion-title>
+      Pokedex
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let pokemon of pokemones" (click) = "openDetail(pokemon)">
+      <ion-avatar item-end >
+        <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
+      </ion-avatar>
+      <h2>{{pokemon.nombre}}</h2>
+      <p>Nº {{pokemon.pokedexNumber}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

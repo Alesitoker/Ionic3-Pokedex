@@ -11,19 +11,28 @@ import { Pokemon } from '../../interfaces/pokemonInterface';
 @Injectable()
 export class PokemonProvider {
 
-  pokeritos: Pokemon[] = [];
+  private pokeritos: Pokemon[] = [];
 
   constructor(public http: HttpClient) {
-    
+
   }
 
-  agregarAFavorito(pokemon: Pokemon) {
+  getPokemonsFavorite() {
+    let favorite = this.pokeritos;
+    return this.pokeritos;
+  }
+
+  getPokemonFavorite(pokemon: number) {
+    return this.pokeritos[pokemon];
+  }
+
+  addFavorite(pokemon: Pokemon) {
     this.pokeritos.push(pokemon);
   }
 
-  getPokemonFavorito() {
-
+  removeFavorite(pokemon: Pokemon) {
+    let favorito = this.pokeritos.indexOf(pokemon);
+    this.pokeritos.splice(favorito, 1);
   }
-
 
 }

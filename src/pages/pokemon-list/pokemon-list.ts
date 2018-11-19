@@ -44,8 +44,6 @@ export class PokemonListPage {
 
   getPokemon(pokedexNumber: number) {
     let poke = pokedexNumber-1;
-    // console.log(pokedexNumber);
-    // console.log(this.pokemones[148].favorito);
     return !this.pokemones[poke].favorito ? "assets/pokemones/"+pokedexNumber+".png":"assets/pokemones/shiny/"+pokedexNumber+".png";
   }
 

@@ -6,12 +6,6 @@ import { TYPES } from "../../data/data_type";
 import { Pokemon } from "../../interfaces/pokemonInterface";
 import { Type } from "../../interfaces/typeInterface";
 import { PokemonProvider } from "../../providers/pokemon/pokemon";
-/**
- * Generated class for the PokemonDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -65,13 +59,12 @@ export class PokemonDetailPage {
 
   ponerFavorito() {
     this.pokemon.favorito = true;
-    this.pokeFv.pokeritos.push(this.pokemon);
+    this.pokeFv.addFavorite(this.pokemon);
   }
 
   quitarFavorito() {
-    let favorito = this.pokeFv.pokeritos.indexOf(this.pokemon);
     this.pokemon.favorito = false;
-    this.pokeFv.pokeritos.splice(favorito, 1);
+    this.pokeFv.removeFavorite(this.pokemon);
   }
 
 }

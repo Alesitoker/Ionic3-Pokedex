@@ -7,14 +7,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { PokemonProvider } from '../providers/pokemon/pokemon';
 import { HttpClientModule } from '@angular/common/http';
-import { PokemonDetailPage, PokemonFavoritePage, PokemonListPage } from "../pages/indexPages";
+import { PokemonDetailPage, PokemonFavoritePage, PokemonListPage, TabsPage } from "../pages/indexPages";
 
 @NgModule({
   declarations: [
     MyApp,
     PokemonDetailPage,
     PokemonFavoritePage,
-    PokemonListPage
+    PokemonListPage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,8 @@ import { PokemonDetailPage, PokemonFavoritePage, PokemonListPage } from "../page
     MyApp,
     PokemonDetailPage,
     PokemonFavoritePage,
-    PokemonListPage
+    PokemonListPage,
+    TabsPage
   ],
   providers: [
     StatusBar,

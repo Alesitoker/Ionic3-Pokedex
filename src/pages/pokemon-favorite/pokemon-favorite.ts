@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the PokemonFavoritePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Pokemon } from '../../interfaces/pokemonInterface';
+import { PokemonProvider } from "../../providers/pokemon/pokemon";
 
 @IonicPage()
 @Component({
@@ -15,11 +11,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PokemonFavoritePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private pokeritos: PokemonProvider) {
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PokemonFavoritePage');
+  getPokemon(pokedexNumber: number) {
+    // let poke = pokedexNumber-1;
+    return "assets/pokemones/"+pokedexNumber+".png";
   }
-
 }

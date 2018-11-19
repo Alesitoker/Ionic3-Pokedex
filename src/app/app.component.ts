@@ -3,14 +3,14 @@ import { Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { PokemonListPage } from "../pages/indexPages";
+import { TabsPage } from "../pages/indexPages";
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  
 
-  rootPage:any = PokemonListPage;
+
+  rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController) {
     platform.ready().then(() => {

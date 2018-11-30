@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar color = "danger">
@@ -13,6 +12,6 @@
   <ion-icon name="star-outline" *ngIf="!pokemon.favorito" class="star-empty" (click)="ponerFavorito()"></ion-icon>
   <ion-icon name="star" *ngIf="pokemon.favorito" class="star-full" (click)="quitarFavorito()"></ion-icon>
   <img class="imgPokemon" [src]="getImgPokemon()">
-  <ion-icon name="arrow-dropleft" class="arrowLeft" *ngIf="!primero"></ion-icon>
-  <ion-icon name="arrow-dropright" class="arrowRight" *ngIf="!ultimo"></ion-icon>
+  <ion-icon name="arrow-dropleft" class="arrowLeft" *ngIf="!primero" (click)="previous()"></ion-icon>
+  <ion-icon name="arrow-dropright" class="arrowRight" *ngIf="!ultimo" (click)="next()"></ion-icon>
 </ion-content>

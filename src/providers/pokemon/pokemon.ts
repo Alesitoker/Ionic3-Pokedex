@@ -2,23 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Pokemon } from '../../interfaces/pokemonInterface';
-/*
-  Generated class for the PokemonProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class PokemonProvider {
 
   private pokeritos: Pokemon[] = [];
+  private swipeMenu: boolean = false;
 
   constructor(public http: HttpClient) {
 
   }
 
   getPokemonsFavorite() {
-    let favorite = this.pokeritos;
     return this.pokeritos;
   }
 
@@ -33,6 +28,18 @@ export class PokemonProvider {
   removeFavorite(pokemon: Pokemon) {
     let favorito = this.pokeritos.indexOf(pokemon);
     this.pokeritos.splice(favorito, 1);
+  }
+
+  noSwipe() {
+    this.swipeMenu = false;
+  }
+
+  yesSwipe() {
+    this.swipeMenu = true;
+  }
+
+  isSwipeMenu() {
+    return this.swipeMenu;
   }
 
 }

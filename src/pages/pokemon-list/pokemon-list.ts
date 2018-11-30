@@ -4,12 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { POKEMONES } from '../../data/data_pokemones';
 import { Pokemon } from '../../interfaces/pokemonInterface';
 import { PokemonDetailPage } from "../indexPages";
-/**
- * Generated class for the PokemonListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -18,16 +14,17 @@ import { PokemonDetailPage } from "../indexPages";
 })
 export class PokemonListPage {
 
-  pokemones: Pokemon[] = [];
+  pokemones: Observable<any[]>;
   imgPokemones: string[] = [];
   shiny: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.pokemones = POKEMONES.slice(0);
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+     private afDB: AngularFireDatabase) {
+    this.pokemones = afDB.list('POKEMONES').valueChanges();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PokemonListPage');
+
   }
 
   changeShiny(pokedexNumber: number) {
@@ -43,8 +40,7 @@ export class PokemonListPage {
   }
 
   getPokemon(pokedexNumber: number) {
-    let poke = pokedexNumber-1;
-    return !this.pokemones[poke].favorito ? "assets/pokemones/"+pokedexNumber+".png":"assets/pokemones/shiny/"+pokedexNumber+".png";
+    return "assets/pokemones/"+pokedexNumber+".png";
   }
 
   openDetail(pokemon: Pokemon) {

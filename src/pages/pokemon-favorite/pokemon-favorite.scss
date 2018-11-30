@@ -1,7 +1,19 @@
 page-pokemon-favorite {
-  
+
   img.sprite {
     width: 80%;
+    height: auto;
+  }
+
+  h2.noPoke {
+    text-align: center;
+    margin-top: 50%;
+
+  }
+
+  img.gifPoke {
+    float: left;
+    width: 30%;
     height: auto;
   }
 }

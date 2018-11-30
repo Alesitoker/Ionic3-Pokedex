@@ -39,7 +39,7 @@ export const TYPES = [
   {
     id: 6,
     name: "Fantasma",
-    muyEficaz: [6, 15, ],
+    muyEficaz: [6, 15],
     pocoEficaz: [3, 17],
     ineficaz: [10, 11],
   },
@@ -89,7 +89,7 @@ export const TYPES = [
     id: 13,
     name: "Psiquico",
     muyEficaz: [3, 6, 15],
-    pocoEficaz: [10, 13, ],
+    pocoEficaz: [10, 13],
     ineficaz: [0],
   },
   {
@@ -124,7 +124,7 @@ export const TYPES = [
     id: 18,
     name: "Volador",
     muyEficaz: [5, 9, 14],
-    pocoEficaz: [3, 10, 12, ],
+    pocoEficaz: [3, 10, 12],
     ineficaz: [16],
   },
 ]

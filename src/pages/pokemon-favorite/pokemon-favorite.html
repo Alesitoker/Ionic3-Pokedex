@@ -8,7 +8,7 @@
 
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="pokeritos.getPokemonsFavorite().length > 0">
     <ion-item *ngFor="let pokemon of pokeritos.getPokemonsFavorite()">
       <ion-avatar item-end >
         <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
@@ -17,4 +17,8 @@
       <p>Nº {{pokemon.pokedexNumber}}</p>
     </ion-item>
   </ion-list>
+  <div *ngIf="pokeritos.getPokemonsFavorite().length <= 0">
+    <img class="gifPoke" src="assets/icons/Y60K.gif">
+    <h2 class="noPoke">No hay pokemones favoritos</h2>
+  </div>
 </ion-content>

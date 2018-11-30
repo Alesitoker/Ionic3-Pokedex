@@ -1,16 +1,17 @@
-<ion-menu [content]="pokeMenu">
+<ion-menu [content]="pokeMenu" side="right" [swipeEnabled]="swipe.isSwipeMenu()">
   <ion-header>
 
-    <ion-toolbar color= "naranja-claro">
-      <ion-title>Paginas</ion-title>
+    <ion-toolbar color= "danger">
+      <ion-title>Mas datos</ion-title>
     </ion-toolbar>
 
   </ion-header>
 
   <ion-content>
     <ion-list>
-      <button ion-button block (click)="abrirPagina(tabs)">Abrir tabs</button>
-      <button ion-button block (click)="abrirPagina(ajustes2)">Abrir Ajustes2</button>
+      <button ion-button block (click)="abrirPagina(mov)">Movimientos</button>
+      <button ion-button block (click)="abrirPagina(location)">Localizacion</button>
+      <button ion-button block (click)="abrirPagina(despcription)">Descripcion pokedex</button>
     </ion-list>
   </ion-content>
 </ion-menu>

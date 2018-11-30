@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { POKEMONES } from "../../data/data_pokemones";
 import { TYPES } from "../../data/data_type";
 import { Pokemon } from "../../interfaces/pokemonInterface";
 import { Type } from "../../interfaces/typeInterface";
 import { PokemonProvider } from "../../providers/pokemon/pokemon";
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -22,13 +24,19 @@ export class PokemonDetailPage {
   ultimo: boolean = false;
   twoTypes: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public pokeFv: PokemonProvider) {
-    this.pokemones = POKEMONES.slice(0);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private pokeFv: PokemonProvider, private afDB: AngularFireDatabase) {
+    this.pokemones = POKEMONES.slice();
     this.types = TYPES.slice(0);
 
     this.iniciarPokemon(this.navParams.get("pokemon"));
-    // console.log(this.pokemon);
-    // console.log(this.type);
+  }
+
+  ionViewDidLoad() {
+    this.pokeFv.yesSwipe();
+  }
+
+  ionViewWillUnload() {
+    this.pokeFv.noSwipe();
   }
 
   private iniciarPokemon(pokemon: Pokemon) {
@@ -67,4 +75,33 @@ export class PokemonDetailPage {
     this.pokeFv.removeFavorite(this.pokemon);
   }
 
+  mostrarMenu() {
+    this.menuCtrl.toggle();
+  }
+
+  next() {
+    let nextPokemon = this.pokemon.pokedexNumber;
+    this.primero = false;
+
+    if (nextPokemon < 151) {
+      this.pokemon = this.pokemones[nextPokemon];
+      // Si es el ultimo pokemon no mostramos la flecha siguiente.
+      if (this.pokemones.length-1 == nextPokemon) {
+        this.ultimo = true;
+      }
+    }
+  }
+
+  previous() {
+    let previousPokemon = this.pokemon.pokedexNumber-2;
+    this.ultimo = false;
+
+    if (previousPokemon >= 0) {
+      this.pokemon = this.pokemones[previousPokemon];
+      // Si es el primer pokemon no mostramos la flecha anterior.
+      if (previousPokemon == 0) {
+        this.primero = true;
+      }
+    }
+  }
 }

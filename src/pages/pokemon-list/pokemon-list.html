@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let pokemon of pokemones" (click) = "openDetail(pokemon)">
+    <ion-item *ngFor="let pokemon of pokemones | async" (click) = "openDetail(pokemon)">
       <ion-avatar item-end >
         <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
       </ion-avatar>

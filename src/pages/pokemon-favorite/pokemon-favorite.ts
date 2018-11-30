@@ -18,7 +18,6 @@ export class PokemonFavoritePage {
   }
 
   getPokemon(pokedexNumber: number) {
-    // let poke = pokedexNumber-1;
     return "assets/pokemones/"+pokedexNumber+".png";
   }
 }

@@ -16,4 +16,18 @@ page-pokemon-favorite {
     width: 30%;
     height: auto;
   }
+
+  .sortIcon {
+    margin-right: 20px;
+    color: #fff !important;
+  }
+
+  .sortIconClicked {
+    margin-right: 20px;
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  ion-avatar {
+    margin: 4px !important;
+  }
 }

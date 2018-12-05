@@ -12,10 +12,17 @@ export class TabsPage {
 
   tab1: any = PokemonListPage;
   tab2: any = PokemonFavoritePage;
+  icon: string = "pokedex";
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-
+  changeTab(selected: number) {
+    if (selected == 0) {
+      this.icon = "pokedex";
+    } else {
+      this.icon = "pokedexSfn";
+    }
+  }
 
 }

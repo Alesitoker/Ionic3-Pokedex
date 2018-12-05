@@ -1,4 +1,4 @@
 <ion-tabs color="danger">
-  <ion-tab [root]="tab1" class="tab" tabTitle="Pokedex" tabIcon="pokedex"></ion-tab>
-  <ion-tab [root]="tab2" class="tab" tabTitle="Favorite" tabIcon="star"></ion-tab>
+  <ion-tab [root]="tab1" class="tab"  tabTitle="Pokedex" [tabIcon]="icon" (ionSelect)="changeTab(0)"></ion-tab>
+  <ion-tab [root]="tab2" class="tab" tabTitle="Favorite" tabIcon="star" (ionSelect)="changeTab(1)"></ion-tab>
 </ion-tabs>

@@ -1,7 +1,7 @@
 <ion-menu [content]="pokeMenu" side="right" [swipeEnabled]="swipe.isSwipeMenu()">
   <ion-header>
 
-    <ion-toolbar color= "danger">
+    <ion-toolbar color="danger">
       <ion-title>Mas datos</ion-title>
     </ion-toolbar>
 
@@ -9,9 +9,9 @@
 
   <ion-content>
     <ion-list>
-      <button ion-button block (click)="abrirPagina(mov)">Movimientos</button>
-      <button ion-button block (click)="abrirPagina(location)">Localizacion</button>
-      <button ion-button block (click)="abrirPagina(despcription)">Descripcion pokedex</button>
+      <button ion-button full clear (click)="abrirPagina(mov)">Movimientos</button>
+      <button ion-button full clear (click)="abrirPagina(location)">Localizacion</button>
+      <button ion-button full clear (click)="abrirPagina(description)">Descripcion pokedex</button>
     </ion-list>
   </ion-content>
 </ion-menu>

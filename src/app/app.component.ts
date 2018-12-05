@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform, MenuController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,6 +10,8 @@ import { PokemonProvider } from "../providers/pokemon/pokemon";
   templateUrl: 'app.html'
 })
 export class MyApp {
+
+  @ViewChild(Nav) nav: Nav;
 
   rootPage:any = TabsPage;
   mov: any = MovimientosPage;
@@ -26,7 +28,7 @@ export class MyApp {
   }
 
   abrirPagina(pagina: any) {
-    this.rootPage = pagina;
+    this.nav.push(pagina);
     this.menuCtrl.close();
   }
 }

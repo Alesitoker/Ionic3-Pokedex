@@ -1,6 +1,10 @@
 page-tabs {
   .ion-ios-pokedex-outline, .ion-ios-pokedex, .ion-md-pokedex, .ion-md-pokedex-outline {
-    content: url('../../assets/icons/pokedex.png');
+    content: url('../../assets/imgs/tabIcon/pokedex.png');
+  }
+
+  .ion-ios-pokedexSfn-outline, .ion-ios-pokedexSfn, .ion-md-pokedexSfn, .ion-md-pokedexSfn-outline {
+    content: url('../../assets/imgs/tabIcon/pokedex2.png');
   }
 
 }

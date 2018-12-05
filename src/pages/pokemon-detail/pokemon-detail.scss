@@ -1,9 +1,5 @@
 page-pokemon-detail {
 
-  .pokeName {
-
-  }
-
   img.imgPokemon {
     width: 50%;
     height: auto;
@@ -44,15 +40,7 @@ page-pokemon-detail {
   }
 
   .menu-button {
-    // border: 0 !important;
-    box-shadow: none !important;
-    position: absolute;
     margin-right: 20px;
-    top: 7px;
-    right: 0;
-  }
-  .menu-button:focus {
-    outline: none !important;
   }
 
 }

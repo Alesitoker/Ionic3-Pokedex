@@ -1,8 +1,10 @@
 <ion-header>
 
   <ion-navbar color = "danger">
-    <ion-title class="pokeName">{{pokemon.nombre}}</ion-title>
-    <button ion-button icon-only color= 'danger' class='menu-button' (click) = 'mostrarMenu()'><ion-icon name="menu"></ion-icon></button>
+    <ion-title>{{pokemon.nombre}}</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only class='menu-button' (click) = 'mostrarMenu()'><ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

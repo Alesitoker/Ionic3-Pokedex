@@ -16,31 +16,32 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PokemonDetailPage {
 
-  pokemones: Pokemon[] = [];
-  types: Type[] = [];
+  pokemones: any[] = [];
   pokemon: Pokemon;
+  types: Type[] = [];
   type: Type[] = [];
   primero: boolean = false;
   ultimo: boolean = false;
   twoTypes: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private pokeFv: PokemonProvider, private afDB: AngularFireDatabase) {
-    this.pokemones = POKEMONES.slice();
+    this.pokemones = this.pokeFv.getAllPokemones();
     this.types = TYPES.slice(0);
 
     this.iniciarPokemon(this.navParams.get("pokemon"));
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.pokeFv.yesSwipe();
   }
 
-  ionViewWillUnload() {
+  ionViewWillLeave() {
     this.pokeFv.noSwipe();
   }
 
   private iniciarPokemon(pokemon: Pokemon) {
-    this.pokemon = pokemon;
+    this.pokeFv.setCurrentPoke(pokemon);
+    this.pokemon = this.pokeFv.getCurrentPoke();
 
     for (let i = 0; i < pokemon.type.length; i++) {
       this.type[i] = this.types[pokemon.type[i]-1];
@@ -54,25 +55,33 @@ export class PokemonDetailPage {
   }
 
   getImgPokemon() {
-    if (this.pokemon.pokedexNumber == this.pokemones[0].pokedexNumber) {
+    let pokemon = this.pokeFv.getCurrentPoke();
+    this.pokemon = pokemon;
+
+    if (pokemon.pokedexNumber == this.pokemones[0].pokedexNumber) {
       this.primero = true;
-    } else if (this.pokemon.pokedexNumber == this.pokemones[this.pokemones.length-1].pokedexNumber) {
+    } else if (pokemon.pokedexNumber == this.pokemones[this.pokemones.length-1].pokedexNumber) {
       this.ultimo = true;
     } else {
       this.primero = false;
       this.ultimo = false;
     }
-    return "assets/pokemones/other-sprites/official-artwork/"+this.pokemon.pokedexNumber+".png";
+    return "assets/pokemones/other-sprites/official-artwork/"+pokemon.pokedexNumber+".png";
   }
 
   ponerFavorito() {
-    this.pokemon.favorito = true;
-    this.pokeFv.addFavorite(this.pokemon);
+    let pokemon = this.pokeFv.getCurrentPoke();
+    this.pokemon = pokemon;
+
+    pokemon.favorito = true;
+    this.pokeFv.addFavorite(pokemon);
   }
 
   quitarFavorito() {
-    this.pokemon.favorito = false;
-    this.pokeFv.removeFavorite(this.pokemon);
+    let pokemon = this.pokeFv.getCurrentPoke();
+
+    pokemon.favorito = false;
+    this.pokeFv.removeFavorite(pokemon);
   }
 
   mostrarMenu() {
@@ -80,10 +89,13 @@ export class PokemonDetailPage {
   }
 
   next() {
-    let nextPokemon = this.pokemon.pokedexNumber;
+    let pokemon = this.pokeFv.getCurrentPoke();
+    let nextPokemon = pokemon.pokedexNumber;
+
     this.primero = false;
 
-    if (nextPokemon < 151) {
+    if (nextPokemon < this.pokemones[this.pokemones.length-1].pokedexNumber) {
+      this.pokeFv.setCurrentPoke(this.pokemones[nextPokemon]);
       this.pokemon = this.pokemones[nextPokemon];
       // Si es el ultimo pokemon no mostramos la flecha siguiente.
       if (this.pokemones.length-1 == nextPokemon) {
@@ -93,10 +105,13 @@ export class PokemonDetailPage {
   }
 
   previous() {
-    let previousPokemon = this.pokemon.pokedexNumber-2;
+    let pokemon = this.pokeFv.getCurrentPoke();
+    let previousPokemon = pokemon.pokedexNumber-2;
+
     this.ultimo = false;
 
     if (previousPokemon >= 0) {
+      this.pokeFv.setCurrentPoke(this.pokemones[previousPokemon]);
       this.pokemon = this.pokemones[previousPokemon];
       // Si es el primer pokemon no mostramos la flecha anterior.
       if (previousPokemon == 0) {

@@ -16,11 +16,11 @@ import { Observable } from 'rxjs/Observable';
 export class PokemonListPage {
 
   pokemones: Observable<any[]>;
-  imgPokemones: string[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private afDB: AngularFireDatabase, public allPokemones: PokemonProvider) {
     this.pokemones = afDB.list('POKEMONES').valueChanges();
+
     this.pokemones.subscribe(pokemon => {
     allPokemones.addPokemon(pokemon);
   });

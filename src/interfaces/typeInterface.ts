@@ -3,5 +3,6 @@ export interface Type {
   name: string,
   muyEficaz: number[],
   pocoEficaz: number[],
-  ineficaz: number[]
+  ineficaz: number[],
+  color: string
 }

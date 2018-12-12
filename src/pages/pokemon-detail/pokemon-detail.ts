@@ -18,7 +18,7 @@ export class PokemonDetailPage {
 
   pokemones: any[] = [];
   pokemon: Pokemon;
-  types: Type[] = [];
+  types: any[] = [];
   type: Type[] = [];
   primero: boolean = false;
   ultimo: boolean = false;
@@ -26,10 +26,13 @@ export class PokemonDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private pokeFv: PokemonProvider, private afDB: AngularFireDatabase) {
     this.pokemones = this.pokeFv.getAllPokemones();
-    this.types = TYPES.slice(0);
+    // Obtenemos los datos de la base de datos.
+    let types = this.afDB.list('TYPES').valueChanges();
+    // Guardamos los datos en types.
+    types.subscribe(type => {this.types.push(type)});
 
     this.iniciarPokemon(this.navParams.get("pokemon"));
-  }
+}
 
   ionViewDidEnter() {
     this.pokeFv.yesSwipe();

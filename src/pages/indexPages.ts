@@ -5,3 +5,4 @@ export { TabsPage } from "./tabs/tabs";
 export { LocalizacionPage } from "./localizacion/localizacion";
 export { MovimientosPage } from "./movimientos/movimientos";
 export { DescripcionPokedexPage } from "./descripcion-pokedex/descripcion-pokedex";
+export { TutorialPage } from "./tutorial/tutorial"

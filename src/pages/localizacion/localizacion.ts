@@ -19,7 +19,7 @@ export class LocalizacionPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LocalizacionPage');
+
   }
 
 }

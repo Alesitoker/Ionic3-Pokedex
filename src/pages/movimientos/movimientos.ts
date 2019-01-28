@@ -12,7 +12,7 @@ export class MovimientosPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MovimientosPage');
+
   }
 
   backButton() {

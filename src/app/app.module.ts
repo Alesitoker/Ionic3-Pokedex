@@ -7,10 +7,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { PokemonProvider } from '../providers/pokemon/pokemon';
 import { HttpClientModule } from '@angular/common/http';
-import { PokemonDetailPage, PokemonFavoritePage, PokemonListPage, TabsPage, MovimientosPage, LocalizacionPage, DescripcionPokedexPage } from "../pages/indexPages";
+import { PokemonDetailPage, PokemonFavoritePage, PokemonListPage,
+  TabsPage, MovimientosPage, LocalizacionPage, DescripcionPokedexPage, TutorialPage } from "../pages/indexPages";
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { IonicStorageModule } from '@ionic/storage';
+import { TutorialpProvider } from '../providers/tutorialp/tutorialp';
+
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBvvIG8cffCwrmvwHS5Hq9svFAFpRNrR2I",
@@ -30,7 +34,8 @@ export const firebaseConfig = {
     TabsPage,
     MovimientosPage,
     LocalizacionPage,
-    DescripcionPokedexPage
+    DescripcionPokedexPage,
+    TutorialPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,14 +55,16 @@ export const firebaseConfig = {
     TabsPage,
     MovimientosPage,
     LocalizacionPage,
-    DescripcionPokedexPage
+    DescripcionPokedexPage,
+    TutorialPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PokemonProvider
+    PokemonProvider,
+    TutorialpProvider
   ]
 })
 export class AppModule {}

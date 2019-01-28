@@ -3,8 +3,9 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { TabsPage, MovimientosPage, LocalizacionPage, DescripcionPokedexPage } from "../pages/indexPages";
+import { TabsPage, MovimientosPage, LocalizacionPage, DescripcionPokedexPage, TutorialPage } from "../pages/indexPages";
 import { PokemonProvider } from "../providers/pokemon/pokemon";
+import { TutorialpProvider } from '../providers/tutorialp/tutorialp';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,17 +14,25 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage:any = TabsPage;
+  rootPage:any = TutorialPage;
   mov: any = MovimientosPage;
   location: any = LocalizacionPage;
   description: any = DescripcionPokedexPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController, private swipe: PokemonProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+    private menuCtrl: MenuController, private swipe: PokemonProvider, private tutorial: TutorialpProvider) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+      this.tutorial.cargarStorage().then(() => {
+        if (this.tutorial.tutorial.mostrarTutorial) {
+          this.rootPage = TutorialPage;
+        } else {
+          this.rootPage = TabsPage;
+        }
+
+        statusBar.styleDefault();
+        splashScreen.hide();
+      });
+
     });
   }
 

@@ -1,10 +1,10 @@
 <ion-header>
 
-  <ion-navbar color="danger">
+  <ion-navbar color="redTo">
     <ion-title>Favorite</ion-title>
     <ion-buttons end>
       <button ion-button icon-only [ngClass]="sortIconStyle"
-      *ngIf="!pokeritos.getEmptyPokeritos()" (click)="ordenar()">
+      *ngIf="oneFavorite" (click)="ordenar()">
         <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,24 +14,36 @@
 
 
 <ion-content>
-  <ion-list *ngIf="pokeritos.getPokemonsFavorite().length > 0" [reorder]="ordenando" (ionItemReorder)="reordenarFavoritos($event)">
-    <ion-item-sliding *ngFor="let pokemon of pokeritos.getPokemonsFavorite(); let i = index">
-      <ion-item>
-        <ion-avatar item-end >
-          <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
-        </ion-avatar>
-        <h2>{{pokemon.nombre}}</h2>
-        <p>Nº {{pokemon.pokedexNumber}}</p>
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="danger" (click) = "borrarPokemon(i)">
-          <ion-icon name="trash"></ion-icon>
-          Borrar
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+  <ion-list *ngIf="!isEmpty()" [reorder]="ordenando" (ionItemReorder)="reordenarFavoritos($event)">
+    <ion-card *ngFor="let pokemon of pokeritos.getPokemonsFavorite(); let i = index">
+      <ion-item-sliding>
+          <ion-item>
+            <ion-avatar item-end >
+              <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
+            </ion-avatar>
+            <div>
+              <p class="pokemonData">#{{numberPokemon(pokemon.pokedexNumber)}}</p>
+              <h2 class="pokemonData">{{pokemon.nombre}}</h2>
+            </div>
+            <ion-list *ngFor="let type of getType(pokemon)">
+              <ion-item class="itemType">
+                <div class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
+                  <span>{{type.name}}</span>
+                </div>
+              </ion-item>
+            </ion-list>
+          </ion-item>
+
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click) = "borrarPokemon(i)">
+            <ion-icon name="trash"></ion-icon>
+            Borrar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-card>
   </ion-list>
-  <div *ngIf="pokeritos.getPokemonsFavorite().length <= 0">
+  <div *ngIf="isEmpty()">
     <img class="gifPoke" src="assets/imgs/Y60K.gif">
     <h2 class="noPoke">No hay pokemones favoritos</h2>
   </div>

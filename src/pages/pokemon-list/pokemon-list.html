@@ -1,20 +1,31 @@
 <ion-header>
-  <ion-navbar color="danger" class="prueba">
+  <ion-navbar color="redTo" class="prueba">
     <ion-title>
       Pokedex
     </ion-title>
-    
+
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let pokemon of pokemones | async" (click) = "openDetail(pokemon)">
-      <ion-avatar item-end >
-        <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
-      </ion-avatar>
-      <h2>{{pokemon.nombre}}</h2>
-      <p>Nº {{pokemon.pokedexNumber}}</p>
-    </ion-item>
+  <ion-list *ngFor="let pokemon of pokemones | async" (click) = "openDetail(pokemon)">
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-end >
+          <img class="sprite" [src]="getPokemonImg(pokemon.pokedexNumber)" >
+        </ion-avatar>
+        <div>
+          <p class="pokemonData">#{{numberPokemon(pokemon.pokedexNumber)}}</p>
+          <h2 class="pokemonData">{{pokemon.nombre}}</h2>
+        </div>
+        <ion-list *ngFor="let type of getType(pokemon)">
+          <ion-item class="itemType">
+            <div class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
+              <span>{{type.name}}</span>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-item>
+    </ion-card>
   </ion-list>
 </ion-content>

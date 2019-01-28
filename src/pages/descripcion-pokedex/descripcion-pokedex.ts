@@ -19,7 +19,7 @@ export class DescripcionPokedexPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DescripcionPokedexPage');
+
   }
 
 }

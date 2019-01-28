@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 import { Pokemon } from '../../interfaces/pokemonInterface';
 
@@ -9,11 +10,14 @@ export class PokemonProvider {
   private pokeritos: Pokemon[] = [];
   private allPokemones: any[] = [];
   private currentpoke: Pokemon;
+  private types: any[] = [];
   private swipeMenu: boolean = false;
-  private emptyPokeritos: boolean = true;
 
-  constructor(public http: HttpClient) {
-
+  constructor(public http: HttpClient, private afDB: AngularFireDatabase) {
+    // Obtenemos los datos de la base de datos.
+    let types = this.afDB.list('TYPES').valueChanges();
+    // Guardamos los datos en types.
+    types.subscribe(type => {this.types.push(type)});
   }
 
   setCurrentPoke(pokemon: Pokemon) {
@@ -42,14 +46,12 @@ export class PokemonProvider {
 
   addFavorite(pokemon: Pokemon) {
     this.pokeritos.push(pokemon);
-    this.isEmpty();
   }
 
   removeFavorite(pokemon: Pokemon) {
     let favorito = this.pokeritos.indexOf(pokemon);
     pokemon.favorito = false;
     this.pokeritos.splice(favorito, 1);
-    this.isEmpty();
   }
 
   noSwipe() {
@@ -64,12 +66,8 @@ export class PokemonProvider {
     return this.swipeMenu;
   }
 
-  getEmptyPokeritos() {
-    return this.emptyPokeritos;
-  }
-
-  private isEmpty() {
-    this.emptyPokeritos = this.pokeritos.length > 1 ? false : true;
+  getType(type: number) {
+    return this.types[0][type];
   }
 
 }

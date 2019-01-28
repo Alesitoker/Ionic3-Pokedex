@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar color = "danger">
+  <ion-navbar color = "redTo">
     <ion-title>{{pokemon.nombre}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only class='menu-button' (click) = 'mostrarMenu()'><ion-icon name="menu"></ion-icon></button>
@@ -14,4 +14,8 @@
   <img class="imgPokemon" [src]="getImgPokemon()">
   <ion-icon name="arrow-dropleft" class="arrowLeft" *ngIf="!primero" (click)="previous()"></ion-icon>
   <ion-icon name="arrow-dropright" class="arrowRight" *ngIf="!ultimo" (click)="next()"></ion-icon>
+  <ion-list *ngFor="let item of type">
+    {{item.name}}
+  </ion-list>
+
 </ion-content>

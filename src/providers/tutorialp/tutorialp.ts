@@ -11,14 +11,10 @@ export class TutorialpProvider {
   tutorial = {
       mostrarTutorial: true
     }
-  private slides: any[] = [];
+  private slides: Slide[] = [];
 
   constructor(public http: HttpClient, private platform: Platform, private storage: Storage, private afDB: AngularFireDatabase) {
-    this.afDB.list('TUTORIAL').valueChanges().subscribe( data => {
-      for (let i = 0; i < data.length; i++) {
-          this.slides.push(data[i]);
-      }
-    });
+
   }
 
   cargarStorage() {
@@ -53,7 +49,22 @@ export class TutorialpProvider {
   }
 
   getSlides() {
-    return this.slides;
+    return new Promise((resolve, reject) => {
+      if (this.slides.length == 0) {
+        this.afDB.list('TUTORIAL').valueChanges().subscribe( (data: Slide[]) => {
+              this.slides = data;
+              resolve(this.slides);
+        });
+      } else {
+        resolve(this.slides);
+      }
+    });
   }
 
+}
+
+interface Slide {
+  title: string;
+  description: string;
+  image: string;
 }

@@ -2,7 +2,7 @@
 
   <ion-slides pager>
 
-    <!-- Código para crear slides -->
+    <!-- Tutorial -->
       <ion-slide *ngFor="let slide of slides">
         <ion-toolbar>
 
@@ -17,9 +17,8 @@
         <h2 class="slide-title" [innerHTML]="slide.title"></h2>
         <p [innerHTML]="slide.description"></p>
       </ion-slide>
-      <!-- Fin del ngFor -->
 
-      <!-- Ultimo Slide -->
+      <!-- Slide fin tutorial -->
       <ion-slide>
         <ion-toolbar>
         </ion-toolbar>
@@ -34,7 +33,6 @@
         </button>
 
       </ion-slide>
-      <!-- Fin del último slide -->
 
     </ion-slides>
 

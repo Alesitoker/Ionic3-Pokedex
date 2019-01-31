@@ -22,18 +22,25 @@ page-pokemon-favorite {
   }
 
   .typeStyle {
-    border-radius: 12px;
+    border-radius: 30px;
     text-align: center;
     font-size: 4vw;
     font-weight: bold;
     color: white;
-    padding: 8px 0px;
+    padding: 4px 0px;
   }
 
   .itemType {
-    padding: 0 !important;
+    padding: 0;
     float: left;
+  }
+
+  .itemTypeSize {
     width: 50%;
+  }
+
+  .label, .label-md {
+    margin: 5% 0 3% 0;
   }
 
   .pokemonData {

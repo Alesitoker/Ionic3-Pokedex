@@ -16,31 +16,29 @@
 <ion-content>
   <ion-list *ngIf="!isEmpty()" [reorder]="ordenando" (ionItemReorder)="reordenarFavoritos($event)">
     <ion-card *ngFor="let pokemon of pokeritos.getPokemonsFavorite(); let i = index">
-      <ion-item-sliding>
-          <ion-item>
-            <ion-avatar item-end >
-              <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
-            </ion-avatar>
-            <div>
-              <p class="pokemonData">#{{numberPokemon(pokemon.pokedexNumber)}}</p>
-              <h2 class="pokemonData">{{pokemon.nombre}}</h2>
-            </div>
-            <ion-list *ngFor="let type of getType(pokemon)">
-              <ion-item class="itemType">
-                <div class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
-                  <span>{{type.name}}</span>
-                </div>
-              </ion-item>
-            </ion-list>
-          </ion-item>
+        <ion-item>
+          <ion-avatar item-end >
+            <img class="sprite" [src]="getPokemon(pokemon.pokedexNumber)" >
+          </ion-avatar>
+          <div>
+            <p class="pokemonData">#{{numberPokemon(pokemon.pokedexNumber)}}</p>
+            <h2 class="pokemonData">{{pokemon.nombre}}</h2>
+          </div>
+          <ion-list *ngFor="let type of getType(pokemon)">
+            <ion-item class="itemType" [ngClass]="{'itemTypeSize': twoTypes}">
+              <div  class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
+                <span>{{type.name}}</span>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-item>
 
-        <ion-item-options side="right">
-          <button ion-button color="danger" (click) = "borrarPokemon(i)">
-            <ion-icon name="trash"></ion-icon>
-            Borrar
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
+      <!-- <ion-item-options side="right">
+        <button ion-button color="danger" (click) = "borrarPokemon(i)">
+          <ion-icon name="trash"></ion-icon>
+          Borrar
+        </button>
+      </ion-item-options> -->
     </ion-card>
   </ion-list>
   <div *ngIf="isEmpty()">

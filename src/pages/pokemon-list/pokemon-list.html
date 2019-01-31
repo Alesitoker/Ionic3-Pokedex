@@ -3,6 +3,9 @@
     <ion-title>
       Pokedex
     </ion-title>
+    <ion-buttons>
+      <button ion-button icon-only class='menu-button' (click) = 'mostrarMenu()'><ion-icon name="menu"></ion-icon></button>
+    </ion-buttons>
 
   </ion-navbar>
 </ion-header>
@@ -19,8 +22,8 @@
           <h2 class="pokemonData">{{pokemon.nombre}}</h2>
         </div>
         <ion-list *ngFor="let type of getType(pokemon)">
-          <ion-item class="itemType">
-            <div class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
+          <ion-item class="itemType" [ngClass]="{'itemTypeSize': twoTypes}">
+            <div  class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
               <span>{{type.name}}</span>
             </div>
           </ion-item>
@@ -28,5 +31,6 @@
       </ion-item>
     </ion-card>
   </ion-list>
+
 
 </ion-content>

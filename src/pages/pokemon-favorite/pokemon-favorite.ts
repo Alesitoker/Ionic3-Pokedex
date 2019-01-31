@@ -15,6 +15,7 @@ export class PokemonFavoritePage {
   private ordenando: boolean = false;
   private sortIconStyle: string = "sortIcon";
   private oneFavorite: boolean = true;
+  private twoTypes: boolean = false;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private pokeritos: PokemonProvider, private toastCtrl: ToastController) {
@@ -46,11 +47,6 @@ export class PokemonFavoritePage {
 
   borrarPokemon(index: number) {
     let pokemon = this.pokeritos.getPokemonFavorite(index);
-    this.toastCtrl.create({
-    message: pokemon.nombre+' ha sido borrado de favoritos',
-    duration: 3000,
-    position: 'bottom'
-  }).present();
     this.pokeritos.removeFavorite(pokemon);
     this.moreOne();
   }
@@ -69,13 +65,20 @@ export class PokemonFavoritePage {
     for (let i = 0; i < pokemon.type.length; i++) {
       type.push(this.pokeritos.getType(pokemon.type[i]-1));
     }
+
+    if (type.length == 1) {
+      this.twoTypes = false;
+    } else {
+      this.twoTypes = true;
+    }
+
     return type;
   }
 
   getColorType(type: Type) {
-    return "#"+type.color;
+    return type.color;
   }
-  
+
   numberPokemon(pokedexNumber: number) {
     let number;
 

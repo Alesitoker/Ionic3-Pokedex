@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { POKEMONES } from '../../data/data_pokemones';
 import { Pokemon } from '../../interfaces/pokemonInterface';
@@ -18,14 +18,33 @@ import { Observable } from 'rxjs/Observable';
 export class PokemonListPage {
 
   pokemones: Observable<any[]>;
+  twoTypes: boolean = false;
+  search: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-     private afDB: AngularFireDatabase, public pokeVider: PokemonProvider) {
+     private afDB: AngularFireDatabase, public menuCtrl: MenuController, public pokeVider: PokemonProvider) {
     this.pokemones = afDB.list('POKEMONES').valueChanges();
 
     this.pokemones.subscribe(pokemon => {
       pokeVider.addPokemon(pokemon);
     });
+
+  }
+
+  ionViewDidEnter() {
+    this.pokeVider.yesSwipe();
+  }
+
+  ionViewWillLeave() {
+    this.pokeVider.noSwipe();
+  }
+
+  mostrarMenu() {
+    this.menuCtrl.toggle();
+  }
+
+  onChange() {
+    console.log(this.search);
   }
 
   getPokemonImg(pokedexNumber: number) {
@@ -52,6 +71,12 @@ export class PokemonListPage {
     for (let i = 0; i < pokemon.type.length; i++) {
       type.push(this.pokeVider.getType(pokemon.type[i]-1));
     }
+
+    if (type.length == 1) {
+      this.twoTypes = false;
+    } else {
+      this.twoTypes = true;
+    }
     return type;
   }
 
@@ -63,5 +88,17 @@ export class PokemonListPage {
     this.navCtrl.push(PokemonDetailPage, {"pokemon":pokemon});
   }
 
+  loadData(event) {
+    setTimeout(() => {
+      console.log('Done');
+      event.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      // if (data.length == 1000) {
+      //   event.target.disabled = true;
+      // }
+    }, 500);
+  }
 
 }

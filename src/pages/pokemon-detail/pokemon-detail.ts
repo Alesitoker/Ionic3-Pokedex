@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { POKEMONES } from "../../data/data_pokemones";
 import { TYPES } from "../../data/data_type";
@@ -22,18 +22,10 @@ export class PokemonDetailPage {
   ultimo: boolean = false;
   twoTypes: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private pokeFv: PokemonProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private pokeFv: PokemonProvider) {
     this.pokemones = this.pokeFv.getAllPokemones();
 
     this.iniciarPokemon(this.navParams.get("pokemon"));
-  }
-
-  ionViewDidEnter() {
-    this.pokeFv.yesSwipe();
-  }
-
-  ionViewWillLeave() {
-    this.pokeFv.noSwipe();
   }
 
   private iniciarPokemon(pokemon: Pokemon) {
@@ -53,22 +45,23 @@ export class PokemonDetailPage {
       this.primero = false;
       this.ultimo = false;
     }
-    this.obtenerTipos();
+    this.obtenerTipos(pokemon);
     return "assets/pokemones/other-sprites/official-artwork/"+pokemon.pokedexNumber+".png";
   }
 
-  obtenerTipos() {
-    let pokemon = this.pokeFv.getCurrentPoke();
+  obtenerTipos(pokemon: Pokemon) {
     this.type = [];
 
     for (let i = 0; i < pokemon.type.length; i++) {
       this.type.push(this.pokeFv.getType(pokemon.type[i]-1));
-      if (i == 1) {
-        this.twoTypes = true;
-      } else if (i == pokemon.type.length) {
-        this.twoTypes = false;
-      }
     }
+
+    if (this.type.length == 1) {
+      this.twoTypes = false;
+    } else {
+      this.twoTypes = true;
+    }
+
   }
 
   ponerFavorito() {
@@ -86,10 +79,6 @@ export class PokemonDetailPage {
     this.pokeFv.removeFavorite(pokemon);
   }
 
-  mostrarMenu() {
-    this.menuCtrl.toggle();
-  }
-
   next() {
     let pokemon = this.pokeFv.getCurrentPoke();
     let nextPokemon = pokemon.pokedexNumber;
@@ -99,7 +88,7 @@ export class PokemonDetailPage {
     if (nextPokemon < this.pokemones[this.pokemones.length-1].pokedexNumber) {
       this.pokeFv.setCurrentPoke(this.pokemones[nextPokemon]);
       this.pokemon = this.pokemones[nextPokemon];
-      this.obtenerTipos();
+      this.obtenerTipos(this.pokemon);
       // Si es el ultimo pokemon no mostramos la flecha siguiente.
       if (this.pokemones.length-1 == nextPokemon) {
         this.ultimo = true;
@@ -116,7 +105,7 @@ export class PokemonDetailPage {
     if (previousPokemon >= 0) {
       this.pokeFv.setCurrentPoke(this.pokemones[previousPokemon]);
       this.pokemon = this.pokemones[previousPokemon];
-      this.obtenerTipos();
+      this.obtenerTipos(this.pokemon);
       // Si es el primer pokemon no mostramos la flecha anterior.
       if (previousPokemon == 0) {
         this.primero = true;

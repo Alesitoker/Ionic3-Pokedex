@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { FormControl } from '@angular/forms';
+import 'rxjs/add/operator/map';
 
 import { POKEMONES } from '../../data/data_pokemones';
 import { Pokemon } from '../../interfaces/pokemonInterface';
@@ -17,18 +19,26 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PokemonListPage {
 
-  pokemones: Observable<any[]>;
-  twoTypes: boolean = false;
-  search: string = "";
+  private pokemones: Observable<any[]>;
+  private searchControl: FormControl;
+  private twoTypes: boolean = false;
+  private search: string = "";
+  private nada: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private afDB: AngularFireDatabase, public menuCtrl: MenuController, public pokeVider: PokemonProvider) {
     this.pokemones = afDB.list('POKEMONES').valueChanges();
+    this.searchControl = new FormControl();
 
     this.pokemones.subscribe(pokemon => {
       pokeVider.addPokemon(pokemon);
     });
+  }
 
+  ionViewDidLoad() {
+    this.searchControl.valueChanges.subscribe(search => {
+      this.filterPokemon();
+    });
   }
 
   ionViewDidEnter() {
@@ -43,8 +53,16 @@ export class PokemonListPage {
     this.menuCtrl.toggle();
   }
 
-  onChange() {
-    console.log(this.search);
+  filterPokemon() {
+    this.pokemones = this.pokemones.map(pokemones => {
+      let fl = pokemones.filter(pokemon => pokemon.nombre.toLowerCase().indexOf(this.search.toLowerCase()) !== -1 || pokemon.pokedexNumber.toString().indexOf(this.search.toLowerCase()) !== -1);
+      if (fl.length > 0) {
+        this.nada = false;
+      } else {
+        this.nada = true;
+      }
+      return fl;
+    });
   }
 
   getPokemonImg(pokedexNumber: number) {
@@ -86,19 +104,6 @@ export class PokemonListPage {
 
   openDetail(pokemon: Pokemon) {
     this.navCtrl.push(PokemonDetailPage, {"pokemon":pokemon});
-  }
-
-  loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      // if (data.length == 1000) {
-      //   event.target.disabled = true;
-      // }
-    }, 500);
   }
 
 }

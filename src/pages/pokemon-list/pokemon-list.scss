@@ -1,5 +1,9 @@
 page-pokemon-list {
 
+  ion-searchbar {
+    padding: 0 !important;
+  }
+
   img.sprite {
     width: 80px;
     height: auto;

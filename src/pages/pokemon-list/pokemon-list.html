@@ -6,7 +6,7 @@
     <ion-buttons>
       <button ion-button icon-only class='menu-button' (click) = 'mostrarMenu()'><ion-icon name="menu"></ion-icon></button>
     </ion-buttons>
-
+    <ion-searchbar value="pokeSearch"  type="text" [(ngModel)]="search" [formControl]="searchControl"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
@@ -32,5 +32,9 @@
     </ion-card>
   </ion-list>
 
+  <div *ngIf="nada">
+    <img class="gifPoke" src="assets/imgs/Y60K.gif">
+    <h2 class="noPoke">No hay resultados para "{{search}}"</h2>
+  </div>
 
 </ion-content>

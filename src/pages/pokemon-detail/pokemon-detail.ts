@@ -17,7 +17,7 @@ export class PokemonDetailPage {
 
   pokemones: any[] = [];
   pokemon: Pokemon;
-  type: Type[] = [];
+  types: Type[] = [];
   primero: boolean = false;
   ultimo: boolean = false;
   twoTypes: boolean = false;
@@ -50,13 +50,13 @@ export class PokemonDetailPage {
   }
 
   obtenerTipos(pokemon: Pokemon) {
-    this.type = [];
+    this.types = [];
 
     for (let i = 0; i < pokemon.type.length; i++) {
-      this.type.push(this.pokeFv.getType(pokemon.type[i]-1));
+      this.types.push(this.pokeFv.getType(pokemon.type[i]-1));
     }
 
-    if (this.type.length == 1) {
+    if (this.types.length == 1) {
       this.twoTypes = false;
     } else {
       this.twoTypes = true;
@@ -111,5 +111,13 @@ export class PokemonDetailPage {
         this.primero = true;
       }
     }
+  }
+
+  numberPokemon() {
+    return this.pokeFv.numberPokemon(this.pokemon.pokedexNumber);
+  }
+
+  getColorType(type: Type) {
+    return type.color;
   }
 }

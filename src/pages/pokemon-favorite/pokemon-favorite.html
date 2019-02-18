@@ -26,19 +26,12 @@
           </div>
           <ion-list *ngFor="let type of getType(pokemon)">
             <ion-item class="itemType" [ngClass]="{'itemTypeSize': twoTypes}">
-              <div  class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
+              <div class="typeStyle" [ngStyle]="{'background-color': getColorType(type)}">
                 <span>{{type.name}}</span>
               </div>
             </ion-item>
           </ion-list>
         </ion-item>
-
-      <!-- <ion-item-options side="right">
-        <button ion-button color="danger" (click) = "borrarPokemon(i)">
-          <ion-icon name="trash"></ion-icon>
-          Borrar
-        </button>
-      </ion-item-options> -->
     </ion-card>
   </ion-list>
   <div *ngIf="isEmpty()">

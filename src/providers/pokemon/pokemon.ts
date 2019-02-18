@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { Pokemon } from '../../interfaces/pokemonInterface';
+import { Type } from '../../interfaces/typeInterface';
 
 @Injectable()
 export class PokemonProvider {
@@ -10,14 +11,14 @@ export class PokemonProvider {
   private pokeritos: Pokemon[] = [];
   private allPokemones: any[] = [];
   private currentpoke: Pokemon;
-  private types: any[] = [];
+  private types: Type[] = [];
   private swipeMenu: boolean = false;
 
   constructor(public http: HttpClient, private afDB: AngularFireDatabase) {
     // Obtenemos los datos de la base de datos.
     let types = this.afDB.list('TYPES').valueChanges();
     // Guardamos los datos en types.
-    types.subscribe(type => {this.types.push(type)});
+    types.subscribe((type: Type[]) => {this.types = type});
   }
 
   setCurrentPoke(pokemon: Pokemon) {
@@ -67,7 +68,21 @@ export class PokemonProvider {
   }
 
   getType(type: number) {
-    return this.types[0][type];
+    return this.types[type];
+  }
+
+  numberPokemon(pokedexNumber: number) {
+    let number;
+
+    if (pokedexNumber < 10) {
+      number = "00"+pokedexNumber;
+    } else if (pokedexNumber < 100) {
+      number = "0"+pokedexNumber;
+    } else {
+      number = pokedexNumber;
+    }
+
+    return number;
   }
 
 }

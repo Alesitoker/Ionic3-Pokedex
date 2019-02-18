@@ -55,7 +55,11 @@ export class PokemonListPage {
 
   filterPokemon() {
     this.pokemones = this.pokemones.map(pokemones => {
-      let fl = pokemones.filter(pokemon => pokemon.nombre.toLowerCase().indexOf(this.search.toLowerCase()) !== -1 || pokemon.pokedexNumber.toString().indexOf(this.search.toLowerCase()) !== -1);
+      // Filtrar por nombre
+      let fl = pokemones.filter(pokemon => pokemon.nombre.toLowerCase().indexOf(this.search.toLowerCase()) !== -1 ||
+      // Filtrar por numero de pokedex
+      pokemon.pokedexNumber.toString().indexOf(this.search.toLowerCase()) !== -1);
+      
       if (fl.length > 0) {
         this.nada = false;
       } else {
@@ -70,17 +74,7 @@ export class PokemonListPage {
   }
 
   numberPokemon(pokedexNumber: number) {
-    let number;
-
-    if (pokedexNumber < 10) {
-      number = "00"+pokedexNumber;
-    } else if (pokedexNumber < 100) {
-      number = "0"+pokedexNumber;
-    } else {
-      number = pokedexNumber;
-    }
-
-    return number;
+    return this.pokeVider.numberPokemon(pokedexNumber);
   }
 
   getType(pokemon: Pokemon) {

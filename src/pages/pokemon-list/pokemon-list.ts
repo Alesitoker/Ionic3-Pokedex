@@ -59,7 +59,7 @@ export class PokemonListPage {
       let fl = pokemones.filter(pokemon => pokemon.nombre.toLowerCase().indexOf(this.search.toLowerCase()) !== -1 ||
       // Filtrar por numero de pokedex
       pokemon.pokedexNumber.toString().indexOf(this.search.toLowerCase()) !== -1);
-      
+
       if (fl.length > 0) {
         this.nada = false;
       } else {

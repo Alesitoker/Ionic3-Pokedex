@@ -1,7 +1,17 @@
 <ion-header>
 
   <ion-navbar color="redTo">
-    <ion-title>Favorite</ion-title>
+    <div class="menu-button">
+      <ion-buttons left>
+        <button ion-button icon-only
+          (click) = 'mostrarMenu()'>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    </div>
+    <div class="navbar-title">
+      <ion-title>Favorite</ion-title>
+    </div>
     <ion-buttons end>
       <button ion-button icon-only [ngClass]="sortIconStyle"
       *ngIf="oneFavorite" (click)="ordenar()">
@@ -11,7 +21,6 @@
   </ion-navbar>
 
 </ion-header>
-
 
 <ion-content>
   <ion-list *ngIf="!isEmpty()" [reorder]="ordenando" (ionItemReorder)="reordenarFavoritos($event)">
@@ -23,6 +32,7 @@
           <div>
             <p class="pokemonData">#{{numberPokemon(pokemon.pokedexNumber)}}</p>
             <h2 class="pokemonData">{{pokemon.nombre}}</h2>
+            <ion-icon name="star" *ngIf="pokemon.favorito" class="star-full" (click)="quitarFavorito(i)"></ion-icon>
           </div>
           <ion-list *ngFor="let type of getType(pokemon)">
             <ion-item class="itemType" [ngClass]="{'itemTypeSize': twoTypes}">

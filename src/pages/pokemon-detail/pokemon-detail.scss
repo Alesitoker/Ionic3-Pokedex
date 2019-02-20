@@ -7,17 +7,17 @@ page-pokemon-detail {
     margin: auto;
   }
 
-  .star-full {
+  .star {
     position: absolute;
     left: 85%;
     font-size: 200%;
+  }
+
+  .star-full {
     color: gold;
   }
 
   .star-empty {
-    position: absolute;
-    left: 85%;
-    font-size: 200%;
     color: black;
   }
 

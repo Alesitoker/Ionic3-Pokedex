@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, reorderArray, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, reorderArray, MenuController } from 'ionic-angular';
 import { Type } from "../../interfaces/typeInterface";
 
 import { Pokemon } from '../../interfaces/pokemonInterface';
 import { PokemonProvider } from "../../providers/pokemon/pokemon";
+import { PokemonDetailPage } from "../indexPages";
 
 @IonicPage()
 @Component({
@@ -18,12 +19,24 @@ export class PokemonFavoritePage {
   private twoTypes: boolean = false;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private pokeritos: PokemonProvider, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private pokeritos: PokemonProvider, public menuCtrl: MenuController) {
 
   }
 
   ionViewWillEnter() {
     this.moreOne();
+  }
+
+  ionViewDidEnter() {
+    this.pokeritos.yesSwipe();
+  }
+
+  ionViewWillLeave() {
+    this.pokeritos.noSwipe();
+  }
+
+  mostrarMenu() {
+    this.menuCtrl.toggle();
   }
 
   getPokemon(pokedexNumber: number) {
@@ -45,7 +58,7 @@ export class PokemonFavoritePage {
     }
   }
 
-  borrarPokemon(index: number) {
+  quitarFavorito(index: number) {
     let pokemon = this.pokeritos.getPokemonFavorite(index);
     this.pokeritos.removeFavorite(pokemon);
     this.moreOne();
@@ -91,6 +104,10 @@ export class PokemonFavoritePage {
     }
 
     return number;
+  }
+
+  openDetail(pokemon: Pokemon) {
+    this.navCtrl.push(PokemonDetailPage, {"pokemon":pokemon});
   }
 
 }

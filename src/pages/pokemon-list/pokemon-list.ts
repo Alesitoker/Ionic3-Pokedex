@@ -24,6 +24,7 @@ export class PokemonListPage {
   private twoTypes: boolean = false;
   private search: string = "";
   private nada: boolean = false;
+  private ocultarSearch: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
      private afDB: AngularFireDatabase, public menuCtrl: MenuController, public pokeVider: PokemonProvider) {
@@ -98,6 +99,15 @@ export class PokemonListPage {
 
   openDetail(pokemon: Pokemon) {
     this.navCtrl.push(PokemonDetailPage, {"pokemon":pokemon});
+  }
+
+  mostrarSearchbar() {
+    this.search = "";
+    if (this.ocultarSearch) {
+      this.ocultarSearch = false;
+    } else {
+      this.ocultarSearch = true;
+    }
   }
 
 }

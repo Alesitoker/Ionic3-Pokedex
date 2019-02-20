@@ -1,19 +1,34 @@
 <ion-header>
-  <ion-navbar color="redTo" class="prueba">
-    <ion-title>
-      Pokedex
-    </ion-title>
-    <ion-buttons>
-      <button ion-button icon-only class='menu-button' (click) = 'mostrarMenu()'><ion-icon name="menu"></ion-icon></button>
-    </ion-buttons>
-    <ion-searchbar value="pokeSearch"  type="text" [(ngModel)]="search" [formControl]="searchControl"></ion-searchbar>
+  <ion-navbar color="redTo">
+    <div class="menu-button">
+      <ion-buttons>
+        <button ion-button icon-only
+        (click) = 'mostrarMenu()'>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      </ion-buttons>
+    </div>
+    <div class="navbar-title">
+      <ion-title>
+        Pokedex
+      </ion-title>
+    </div>
+    <div class = "seachbar-button">
+      <ion-buttons>
+        <button ion-button icon-only
+          (click) = 'mostrarSearchbar()'>
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+    </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let pokemon of pokemones | async" (click) = "openDetail(pokemon)">
+  <ion-searchbar [ngClass] = "{'searchbar': ocultarSearch}" value="pokeSearch"  type="text" [(ngModel)]="search" [formControl]="searchControl"></ion-searchbar>
+  <ion-list *ngFor="let pokemon of pokemones | async" >
     <ion-card>
-      <ion-item>
+      <ion-item (click) = "openDetail(pokemon)">
         <ion-avatar item-end >
           <img class="sprite" [src]="getPokemonImg(pokemon.pokedexNumber)" >
         </ion-avatar>
@@ -32,7 +47,7 @@
     </ion-card>
   </ion-list>
 
-  <div *ngIf="nada">
+  <div *ngIf="nada" class = "emptySearch">
     <img class="gifPoke" src="assets/imgs/Y60K.gif">
     <h2 class="noPoke">No hay resultados para "{{search}}"</h2>
   </div>

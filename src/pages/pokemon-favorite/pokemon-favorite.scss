@@ -1,5 +1,18 @@
 page-pokemon-favorite {
 
+  .menu-button {
+    width: 9%;
+    margin-left: 3%;
+    display: inline-block;
+  }
+
+  .navbar-title {
+    position: absolute;
+    width: 45%;
+    top: 28%;
+    left: 16%
+  }
+
   img.sprite {
     width: 75px;
     height: auto;
@@ -46,6 +59,14 @@ page-pokemon-favorite {
   .pokemonData {
     display: inline-block;
     font-size: 4.5vw;
+  }
+
+  .star-full {
+    position: absolute;
+    margin-right: 10%;
+    font-size: 150%;
+    right: 22%;
+    color: gold;
   }
 
   .sortIcon {
